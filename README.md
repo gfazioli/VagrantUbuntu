@@ -124,19 +124,91 @@ Next, create a file `.bowerrc`
 In your package.json add
 
 ```json
-"dependencies": {
-  "react-tools": "*",
-  "express": "*",
-  "uglify-js": "*",
-  "less": "~2.5.3"
+{
+  "private": true,
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-uglify": "^1.4.2",
+    "laravel-elixir": "^3.4.1",
+    "less": "~2.5.3",
+    "uglify-js": "^2.5.0"
+  },
+  "dependencies": {
+    "express": "*",
+    "jquery": "^2.1.4",
+    "materialize-css": "^0.97.1",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-select": "^0.7.0",
+    "react-tools": "~0.13.3"
+  }
 }
 ```
 
 And then
 
 ```shell
-npm update
+npm install
 bower install
+```
+
+## Gulp
+
+Example
+
+```js
+var elixir = require( 'laravel-elixir' );
+
+/*
+ |--------------------------------------------------------------------------
+ | Elixir Asset Management
+ |--------------------------------------------------------------------------
+ |
+ | Elixir provides a clean, fluent API for defining some basic Gulp tasks
+ | for your Laravel application. By default, we are compiling the Sass
+ | file for our application, as well as publishing vendor resources.
+ |
+ */
+
+elixir( function( mix )
+{
+  // compile less
+  mix.less( 'global.less', 'resources/assets/css/global.css' );
+  mix.less( 'welcome.less', 'public/css' );
+  mix.less( 'own.less', 'public/css' );
+
+  // apps styles
+  mix.styles(
+    [
+      './node_modules/materialize-css/dist/css/materialize.css',
+      './node_modules/react-select/dist/default.css',
+      'global.css',
+
+    ],
+    'public/css'
+  );
+
+  // browserify
+  mix.browserify( "resources/assets/jsx/common.jsx", "resources/assets/js/common.js" );
+
+  // components
+  mix.babel( "resources/assets/jsx/materialize-preload.jsx", "resources/assets/js/materialize-preload.js" );
+
+  // report
+  mix.babel( "resources/assets/jsx/report-*.jsx", "public/js/report-tools.js" );
+  mix.babel( "resources/assets/jsx/report.jsx", "public/js/report.js" );
+
+  // move file and concats base
+  mix.scripts(
+    [
+      'common.js',
+      './node_modules/materialize-css/dist/js/materialize.js',
+      './resources/assets/js/materialize-preload.js'
+    ],
+    'public/js'
+  );
+} );
 ```
 
 ## Laravel views
@@ -144,6 +216,10 @@ bower install
 If you would like use materialize use this syntax in blade view
 
 ```html
-<!-- Materialize --->
-<link href='{{ asset( 'vendor/materialize/dist/css/materialize.min.css') }}' rel='stylesheet' type='text/css'>
+<!-- Materialize + React Select + own --->
+<link href='{{ asset( 'css/all.css') }}' rel='stylesheet' type='text/css'>
+
+<!-- Footer -->
+<script src="{{ asset( 'js/all.js' ) }}"></script>
+
 ```
