@@ -1,0 +1,15 @@
+---
+- name: Install NFS Server
+  apt: pkg=nfs-kernel-server state=installed
+
+- name: Configure NFS
+  template: src=roles/nfs/templates/exports.j2 dest=/etc/exports owner=vagrant group=vagrant
+
+- name: Create shared folder
+  file: path=/mysite state=directory owner=nobody group=nogroup
+
+- name: Exporting folder
+  shell: "/usr/sbin/exportfs -a"
+
+- name: Start NFS
+  service: name=nfs-kernel-server state=started enabled=true

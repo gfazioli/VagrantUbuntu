@@ -1,0 +1,11 @@
+- name: Install Mysql
+  apt: pkg={{ item }} state=installed
+  with_items:
+   - mysql-server
+   - python-mysqldb
+
+- name: Create Database
+  mysql_db: name={{ db_name }} state=present
+
+- name: Create Wordpress database user
+  mysql_user: name={{ db_user }} password={{ db_password }} priv={{ db_name }}.*:ALL host='localhost' state=present

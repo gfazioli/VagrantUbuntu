@@ -1,0 +1,6 @@
+---
+
+# Database Settings
+db_name: mysite
+db_user: root
+db_password: password

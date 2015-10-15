@@ -1,0 +1,26 @@
+---
+- name: Install Nginx
+  apt: pkg=nginx state=installed
+
+- name: Configure Nginx
+  template: src=roles/nginx/templates/nginx/nginx.conf.j2 dest=/etc/nginx/nginx.conf owner=vagrant group=vagrant
+  notify: restart nginx
+
+- name: Create vhosts mysite.dev
+  template: src=roles/nginx/templates/nginx/mysite.dev.j2 dest=/etc/nginx/sites-available/mysite.dev owner=vagrant group=vagrant
+  notify: restart nginx
+
+- name: Create vhosts api.mysite.dev
+  template: src=roles/nginx/templates/nginx/api.mysite.dev.j2 dest=/etc/nginx/sites-available/api.mysite.dev owner=vagrant group=vagrant
+  notify: restart nginx
+
+- name: Activate vhosts mysite.dev
+  file: src=/etc/nginx/sites-available/mysite.dev dest=/etc/nginx/sites-enabled/mysite.dev state=link
+  notify: restart nginx
+
+- name: Activate vhosts api.mysite.dev
+  file: src=/etc/nginx/sites-available/api.mysite.dev dest=/etc/nginx/sites-enabled/api.mysite.dev state=link
+  notify: restart nginx
+
+- name: Start Nginx
+  service: name=nginx state=started enabled=true
