@@ -52,6 +52,7 @@ First of all logged in into Ubuntu
 ```shell
 vagrant ssh ubuntu
 ```
+
 Enter as root and change dir
 
 ```shell
@@ -91,7 +92,7 @@ DB_HOST=127.0.0.1
 DB_DATABASE=mysite
 DB_USERNAME=root
 DB_PASSWORD=password
-``
+```
 
 then use:
 
@@ -113,6 +114,7 @@ ln -s /usr/bin/nodejs /usr/bin/node
 apt-get install npm
 npm install -g bower
 ```
+
 Next, create a file `.bowerrc`
 
 ```json
