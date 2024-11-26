@@ -1,0 +1,31 @@
+- name: Install PHP and Dependencies
+  apt: pkg={{ item }} state=present
+  with_items:
+   - php8.3-fpm
+   - php8.3-cli
+   - php8.3-common
+   - php8.3-curl
+   - php8.3-gd
+   - php8.3-geoip
+   - php8.3-gmp
+   - php8.3-imagick
+   - php8.3-intl
+   - php8.3-json
+   - php8.3-mcrypt
+   - php8.3-memcache
+   - php8.3-memcached
+   - php8.3-mysql
+   - php8.3-xdebug
+   - php-apc
+   - php-pear
+
+- name: Copy pool configuration file
+  template: src=www.conf.j2 dest=/etc/php/8.3/fpm/pool.d/www.conf
+  notify: restart php-fpm
+
+- name: Copy xdebug.ini
+  template: src=20-xdebug.ini.j2 dest=/etc/php/8.3/fpm/conf.d/20-xdebug.ini
+  notify: restart php-fpm
+
+- name: Start php-fpm
+  service: name=php8.3-fpm state=started enabled=true

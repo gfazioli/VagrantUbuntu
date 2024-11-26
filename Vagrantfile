@@ -19,8 +19,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 # ###################################################################################################################################################
 
  config.vm.define :ubuntu do |node|
-  node.vm.box = "ubuntu1404-64"
-  node.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+  node.vm.box = "ubuntu2004-64"
+  node.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/focal/current/focal-server-cloudimg-amd64-vagrant.box"
   node.vm.network "private_network", ip: "192.168.200.200"
   node.vm.hostname = "mysite"
   node.bindfs.debug = true

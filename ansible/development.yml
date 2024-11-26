@@ -7,5 +7,5 @@
   - sys
   - mysql
   - nginx
-  - php5-fpm
+  - php8.3-fpm
   - nfs

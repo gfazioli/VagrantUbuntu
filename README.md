@@ -8,7 +8,7 @@ This is the list of software installed:
 
 - Ubuntu Box with the following software
   - Nginx
-  - Php5-fpm
+  - Php8.3-fpm
   - Mysql
   - Various system software (likve Vim and Git)
 
