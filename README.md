@@ -1,5 +1,10 @@
 # Ubuntu (Vagrant+Ansible)
 
+<div align="center">
+  <p><img src="https://raw.githubusercontent.com/gfazioli/gfazioli/master/glancecard/VagrantUbuntu.svg" width="880" alt="VagrantUbuntu at a glance, refreshed daily: commits, releases, stars, issues and pull requests, a year of commit activity, the weekly rhythm, languages, latest commits and releases, contributors" /><br>
+  <sub>Made with <a href="https://github.com/gfazioli/glancecard">glancecard</a> · refreshed daily</sub></p>
+</div>
+
 Base on https://github.com/nballotta/one-command-wordpress
 
 This is a Vagranfile plus Ansible recipe to get a starting Development Environment.
